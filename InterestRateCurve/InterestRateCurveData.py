@@ -2,13 +2,13 @@
 
 
 import json
-import qrpm_funcs_modified as qf
+from . import qrpm_funcs_modified as qf
 import numpy as np
 from datetime import datetime
 import pandas as pd
 import os
 class InterestRateCurveData:
-    def __init__(self):
+    def __init__(self, CONF_PATH = "config.json"):
         self._API_KEY = None
         self._TREASURY_TICKER_LIST=['DGS1MO','DGS3MO','DGS6MO','DGS1','DGS2','DGS3','DGS5','DGS7','DGS10','DGS20','DGS30']
         self._MATURITIES =qf.TenorsFromNames(self._TREASURY_TICKER_LIST)
@@ -16,11 +16,12 @@ class InterestRateCurveData:
         self._START_DATE = None
         self._DATA = None
         self._DATA_PATH = None
+        self._CONF_PATH = CONF_PATH
         self.run_config()
 
 
-    def run_config(self, filename="config.json"):
-        with open(filename, "r") as file:
+    def run_config(self):
+        with open(self._CONF_PATH, "r") as file:
             config = json.load(file)
         try:
             self._API_KEY = config['API_KEY']
