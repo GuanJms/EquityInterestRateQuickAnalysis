@@ -2,6 +2,8 @@
 #Function library for Quantitative Risk and Portfolio Management book
 #Copyright (c) 2022 Kenneth Winston
 
+#Modified for learning purpose
+
 #Generate sample standard deviations over lookback months
 def GenSampleSd(LogReturns,lookbacks):
     import numpy as np
@@ -179,7 +181,7 @@ def TenorsFromNames(seriesnames):
     return(tenors)
 #Done with TenorsFromNames
 
-def GetFREDMatrix(seriesnames,progress=False,startdate=None,enddate=None):
+def GetFREDMatrix(seriesnames,API_KEY, progress=False,startdate=None,enddate=None):
     #Get a matrix (rows=dates,columns=series) of data
     #from FRED database
     #See http://mortada.net/python-api-for-fred.html
@@ -197,7 +199,7 @@ def GetFREDMatrix(seriesnames,progress=False,startdate=None,enddate=None):
     import pandas as pd
     import numpy as np
     import fredapi
-    fred = fredapi.Fred(api_key='c76b22dde57050738fc29038878f07b9')
+    fred = fredapi.Fred(api_key=API_KEY)
 
     #Get each time series and load it into a common dataframe
     initialize=True
